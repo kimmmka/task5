@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Comments, Product,Category
+from .models import Comment, Product,Category
 
 
 def product_list(request, category_slug=None):
