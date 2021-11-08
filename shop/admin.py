@@ -1,10 +1,6 @@
 from django.contrib import admin
-from .models import Comment, Category, Product
+from .models import Category, Product
 
-
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ['author', 'rate','content','creation_date', 'replies']
-admin.site.register(Comment, CommentAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']

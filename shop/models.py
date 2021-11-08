@@ -2,16 +2,6 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 
-class Comment(models.Model):
-    author = models.CharField(max_length=200, db_index=True)
-    rate = models.IntegerField(default=0,validators=[MinValueValidator(1),MaxValueValidator(5)])
-    content = models.TextField(blank=True)
-    creation_date = models.DateTimeField(auto_now_add=True)
-    replies = models.CharField(max_length=200, db_index=True)
-    product = models.ForeignKey("shop.Product", on_delete=models.CASCADE)
-    def str(self):
-        return self.name
-
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)

@@ -26,7 +26,7 @@ CART_SESSION_ID = 'cart'
 SECRET_KEY = 'django-insecure-vjhbzgrp98s6-^a+1lgoz-h4o5cguuy2w3y)k&03xtc0py%qq$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -117,8 +117,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',]
+    
 }
 
 # Database
