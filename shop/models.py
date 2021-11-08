@@ -8,7 +8,7 @@ class Comment(models.Model):
     content = models.TextField(blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     replies = models.CharField(max_length=200, db_index=True)
-    product = models.ForeignKey("shop.Product", on_delete=models.CASCADE, related_name="reviews")
+    product = models.ForeignKey("shop.Product", on_delete=models.CASCADE)
     def str(self):
         return self.name
 
@@ -37,11 +37,10 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(99)])
     supplier = models.CharField(max_length=200, db_index=True)
-    category = models.CharField(max_length=200, db_index=True)
+    category = models.ForeignKey(Category, related_name='products',on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('shop:product_list_by_category',
-                        args=[self.slug])
+        return reverse('shop:product_list_by_category', args=[self.slug])
 
  
     class Meta:

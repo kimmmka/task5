@@ -16,11 +16,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from account import views as account_views
 from django.conf.urls.static import static
+from django.conf.urls import url
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
+    url(r'^', include('shop.urls', namespace='shop')),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('djoser.urls.authtoken'))
+]
+urlpatterns = [
+    path('admin/', admin.site.urls),
+	
+	path('api1/v1/register/', account_views.RegisterAPIView.as_view()),
+    path('api1/v1/login/', account_views.LoginAPIView.as_view()),
+    path('api1/v1/confirm/', account_views.ConfirmAPIView.as_view()),
 ]
 
 if settings.DEBUG:
