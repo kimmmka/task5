@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
 from datetime import timedelta
+
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CART_SESSION_ID = 'cart'
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +26,7 @@ CART_SESSION_ID = 'cart'
 SECRET_KEY = 'django-insecure-vjhbzgrp98s6-^a+1lgoz-h4o5cguuy2w3y)k&03xtc0py%qq$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,9 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'djoser',
-    'cart',
     'account',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

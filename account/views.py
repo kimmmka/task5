@@ -51,7 +51,7 @@ class ConfirmAPIView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 class LoginAPIView(APIView):
-    def login(request):
+    def post(self, request):
             username = request.data['username']
             password = request.data['password']
             user = authenticate(username = username, password=password)

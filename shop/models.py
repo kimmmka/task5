@@ -1,14 +1,25 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 
+
+class Comment(models.Model):
+    author = models.CharField(max_length=200, db_index=True)
+    rate = models.IntegerField(default=0,validators=[MinValueValidator(1),MaxValueValidator(5)])
+    content = models.TextField(blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    replies = models.CharField(max_length=200, db_index=True, default=None)
+    product = models.ForeignKey("shop.Product", on_delete=models.CASCADE)
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.author, self.content)
+
+         
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
     
-    def get_absolute_url(self):
-        return reverse('shop:product_detail',
-                        args=[self.id, self.slug])
+
     class Meta:
         ordering = ('name',)
         verbose_name = 'Категория'
@@ -39,3 +50,9 @@ class Product(models.Model):
 
     def str(self):
         return self.name
+
+
+class Cart(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    products = models.ForeignKey('Product', related_name='products', on_delete=models.CASCADE)
+    quantity= models.IntegerField(default=0)
