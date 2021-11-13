@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path, include
 from . import views
-from .views import ProductView, CategoryView, CartView, CommentView
+from .views import ProductView, CategoryView, CartView, CommentView, Cart_detailView
 
 app_name = "shop"
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('products/', ProductView.as_view()),
     path('categories/', CategoryView.as_view()),
     path('cart/', CartView.as_view()),
+    path('cart/', Cart_detailView.as_view()),
     path('comment/', CommentView.as_view()),
     path('products/<int:pk>', ProductView.as_view())
 ]

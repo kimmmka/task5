@@ -54,5 +54,14 @@ class Product(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    products = models.ForeignKey('Product', related_name='products', on_delete=models.CASCADE)
+    total_sum=models.IntegerField(default=0)
+    CHOICES= [(1, 'new'), (2,'paid'),]
+    status = models.IntegerField(choices=CHOICES, default=1)
+        
+
+class Cart_detail(models.Model):
+    cart_id=models.ForeignKey('Cart', on_delete=models.CASCADE)
     quantity= models.IntegerField(default=0)
+    products = models.ForeignKey('Product', related_name='products', on_delete=models.CASCADE)
+    
+

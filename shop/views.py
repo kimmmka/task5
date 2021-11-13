@@ -106,6 +106,7 @@ class CommentView(APIView):
         if serializer.is_valid(raise_exception=True):
             comment_saved = serializer.save()
         return Response({"success": "Comment '{}' created successfully".format(comment_saved.title)})
+    
     def put(self, request, pk):
         saved_comment = get_object_or_404(Comment.objects.all(), pk=pk)
         data = request.data.get('comment')
@@ -115,6 +116,7 @@ class CommentView(APIView):
         return Response({
             "success": "Comment '{}' updated successfully".format(comment_saved.title)
         })
+    
     def delete(self, request, pk):
         # Get object with this pk
         comment = get_object_or_404(Comment.objects.all(), pk=pk)
@@ -123,3 +125,33 @@ class CommentView(APIView):
             "message": "Comment with id `{}` has been deleted.".format(pk)
         }, status=204)
 
+class Cart_detailView(APIView):
+    def get(self, request):
+        cart_detail=Cart_detail.objects.all()
+        return Response({"cart_detail": comments})
+
+    def post(self, request):
+        cart_detail = request.data.get('cart_detail')
+        # Create an article from the above data
+        serializer = Cart_detailSerializer(data=comment)
+        if serializer.is_valid(raise_exception=True):
+            cart_detail_saved = serializer.save()
+        return Response({"success": "Cart_detail '{}' created successfully".format(cart_detail_saved.title)})
+    
+    def put(self, request, pk):
+        saved_cart_detail = get_object_or_404(Cart_detail.objects.all(), pk=pk)
+        data = request.data.get('cart_detail')
+        serializer = Cart_detailSerializer(instance=saved_cart_detail, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            cart_detail_saved = serializer.save()
+        return Response({
+            "success": "Cart_detail '{}' updated successfully".format(cart_detail_saved.title)
+        })
+    
+    def delete(self, request, pk):
+        # Get object with this pk
+        cart_detail = get_object_or_404(cart_detail.objects.all(), pk=pk)
+        cart_detail.delete()
+        return Response({
+            "message": "Cart_detail with id `{}` has been deleted.".format(pk)
+        }, status=204)

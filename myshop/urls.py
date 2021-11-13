@@ -42,7 +42,7 @@ urlpatterns = [
     path('api/', include('shop.urls')),
 	path('api1/v1/register/', account_views.RegisterAPIView.as_view()),
     path('api1/v1/login/', account_views.LoginAPIView.as_view()),
-    path('api1/v1/confirm/', account_views.ConfirmAPIView.as_view()),
+    path('api1/v1/update/', account_views.UpdateAPIView.as_view()),
 ]
 
 if settings.DEBUG:
