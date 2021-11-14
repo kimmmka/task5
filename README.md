@@ -16,7 +16,7 @@ https://github.com/kimmmka/task4.git
 *pip install -r requirements.txt* 
 ```
 
-**3.**Go to the project through the console window and enter: 
+**3.** Go to the project through the console window and enter: 
 ```sh
 docker-compose up --build -d
 
@@ -33,7 +33,7 @@ docker-compose up --build -d
 
 ##### *python manage.py createsuperuser*
 
-**6.**Server started
+**6.** Server started
 go to: [site](http://127.0.0.1:8000/admin/course)
 
 ## Built With
