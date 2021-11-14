@@ -9,9 +9,9 @@ urlpatterns = [
     path('products/', ProductView.as_view()),
     path('categories/', CategoryView.as_view()),
     path('cart/', CartView.as_view()),
-    path('cart/', Cart_detailView.as_view()),
+    path('cart_detail/', Cart_detailView.as_view()),
     path('comment/', CommentView.as_view()),
-    path('products/<int:pk>', ProductView.as_view())
+    path('products/<int:pk>', ProductView.as_view(), name='product_id')
 ]
 
 '''urlpatterns = [
