@@ -1,7 +1,7 @@
+\myvenv
 \__pycache__
 \account\__pycache__
 \myshop\__pycache__
 \shop\__pycache__
 \.env
 \db.sqlite3
-\myvenv
