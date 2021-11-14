@@ -7,7 +7,7 @@ class CommentModelTest(TestCase):
         comment= Comment.object.create(
             author='user1', rate=1, 
             content="good juice")
-        category = Category.objects.create(name='drinks')
+        category = Category.objects.create(name='drinks', slug='drinks')
         product = Product.objects.create(title='juice', slug='juice',
                 description='bla-bla', product_category="drinks", product_category_slug="drinks", image='ffrf.jpg',
                 price = 90,discount=20, suplier='russia')
