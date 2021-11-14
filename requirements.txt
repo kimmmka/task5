@@ -5,3 +5,4 @@ markdown
 django-filter
 djoser 
 Pillow
+python-decouple==3.1
