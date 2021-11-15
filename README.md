@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 This is a project written using Python, Django and Django Rest Framework
 
 **1.** Clone the repository
-https://github.com/kimmmka/task4.git
+https://github.com/kimmmka/task5.git
 
 **2.** Install the requirements
 
