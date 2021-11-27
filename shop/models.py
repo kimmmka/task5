@@ -18,8 +18,6 @@ class Comment(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
-    
-
     class Meta:
         ordering = ('name',)
         verbose_name = 'Категория'
@@ -38,7 +36,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.IntegerField(default=0,validators=[MinValueValidator(0),MaxValueValidator(99)])
     supplier = models.CharField(max_length=200, db_index=True)
-    category = models.ForeignKey(Category, related_name='products',on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('shop:product_list_by_category', args=[self.slug])
@@ -62,6 +60,6 @@ class Cart(models.Model):
 class Cart_detail(models.Model):
     cart_id=models.ForeignKey('Cart', on_delete=models.CASCADE)
     quantity= models.IntegerField(default=0)
-    products = models.ForeignKey('Product', related_name='products', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', related_name='product', on_delete=models.CASCADE)
     
 
