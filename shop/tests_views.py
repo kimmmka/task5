@@ -31,19 +31,19 @@ class ProductDetailViewTest(TestCase):
              category=Category.objects.get(id=1)) 
     
     def test_product_detail_GET(self):
-        response = self.client.get(reverse('product_id', kwargs ={'pk': Product.objects.get(id=1).pk}))
+        response = self.client.get(reverse('product', kwargs ={'pk': Product.objects.get(id=1).pk}))
         serializer = ProductSerializer(Product.objects.get(id=1))
 
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, 200)
 
     def test_product_details_GET_invalid(self):
-        response = self.client.get(reverse('product_id', kwargs ={'pk': Product.objects.get(id=1).pk}))
+        response = self.client.get(reverse('product', kwargs ={'pk': Product.objects.get(id=1).pk}))
         serializer = ProductSerializer(Product.objects.get(id=2))
         
         self.assertFalse(response.data == serializer.data)
         self.assertEqual(response.status_code, 200)
 
     def test_product_details_DELETE(self):
-        response = self.client.delete(reverse('product_id', kwargs ={'pk': Product.objects.get(id=2).pk}))
+        response = self.client.delete(reverse('product', kwargs ={'pk': Product.objects.get(id=2).pk}))
         self.assertEquals(response.status_code, 204)

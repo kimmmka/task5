@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from django.core.validators import MaxValueValidator, MinValueValidator
-from .models import Product, Cart, Comment, Cart_detail
+from .models import Product, Cart, Comment, Cart_detail, Category
 
-class ProductSerializer(serializers.Serializer):
-    category_name = serializers.CharField(source='category.name')
+class ProductSerializer(serializers.ModelSerializer):
+    
     def create(self, validated_data):
         return Product.objects.create(**validated_data)
 
@@ -22,11 +22,9 @@ class ProductSerializer(serializers.Serializer):
 
     class Meta:
         model=Product
-        fields="__all__"
+        fields = ('id', 'title','slug','description','created','price','category')
 
-class CategorySerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=200)
-    slug = serializers.SlugField(max_length=200)
+class CategorySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Category.objects.create(**validated_data)
     def update(self, instance, validated_data):
@@ -34,27 +32,31 @@ class CategorySerializer(serializers.Serializer):
         instance.slug = validated_data.get('slug', instance.slug)
         instance.save()
         return instance
+    class Meta:
+        model=Category
+        fields = ('id', 'name', 'slug')
 
-class Cart_detailSerializer(serializers.Serializer):
+class Cart_detailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart_detail 
-        fields="__all__"
+        fields=('id','cart_id', 'quantity', 'product')
     def create(self, validated_data):
         return Cart_detail.objects.create(**validated_data)
     def update(self, instance, validated_data):
         instance.cart_id = validated_data.get('cart_id', instance.cart_id)
-        instance.products = validated_data.get('products', instance.products)
+        instance.product = validated_data.get('product', instance.products)
         instance.quantity = validated_data.get('quantity', instance.quantity)
         instance.save()
         return instance
 
 
-class CartSerializer(serializers.Serializer):
-    total_sum=serializers.IntegerField(default=0)
+class CartSerializer(serializers.ModelSerializer):
+    '''total_sum=serializers.IntegerField(default=0)
     status = serializers.CharField(max_length=200)
     user = serializers.CharField(source='user.username')
     if(status=='new'):
         serializer = Cart_detailSerializer(data=cart_detail)
+    '''
     def create(self, validated_data):
         return Cart.objects.create(**validated_data)
     def update(self, instance, validated_data):
@@ -65,12 +67,11 @@ class CartSerializer(serializers.Serializer):
         return instance
     class Meta:
         model=Cart
-        fields="__all__"
+        fields=( 'id', 'user','total_sum', 'status')
 
-class CommentSerializer(serializers.Serializer):
-    product = serializers.CharField(source='product.title')
+class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
-        return Cart.objects.create(**validated_data)
+        return Comment.objects.create(**validated_data)
     def update(self, instance, validated_data):
         instance.author = validated_data.get('author', instance.author)
         instance.rate = validated_data.get('rate', instance.rate)
@@ -82,4 +83,4 @@ class CommentSerializer(serializers.Serializer):
         return instance
     class Meta:
         model=Comment
-        fields="__all__"
+        fields=('id', 'author', 'rate', 'content', 'creation_date', 'replies', 'product')
