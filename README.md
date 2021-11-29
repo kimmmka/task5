@@ -41,3 +41,4 @@ go to: [site](http://127.0.0.1:8000/admin/course)
 Django - The framework used, Django Rest Framework - The toolkit used to build API, Swagger UI - for API documentation.
 
 ## Documentation
+go to: [collection query](https://web.postman.co/workspace/42686f4e-342c-4948-81fa-a29084a42d29/request/17666072-fe6a8ff4-668e-4852-8b35-a849192fe4f2)
